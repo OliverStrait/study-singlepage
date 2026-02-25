@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <title>🚩 Docrates, lightweight document viewer</title>
+    <style>
+        :root {
+            --col-backer: rgb(165, 165, 189);
+        }
+
+        header {
+            margin: auto;
+            text-align: center;
+            background-color: antiquewhite;
+            width: 80vw;
+            font-family: Garamond;
+            font-size: 1.5rem;
+            padding: .1rem 0 1em;
+            border-radius: 3rem;
+
+        }
+
+        .meta {
+            display: none;
+        }
+
+        .hide {
+            display: none;
+            transition: transform 2s ease;
+            transform: rotate(90deg) scale(0);
+        }
+
+        #article_menu {
+            position: sticky;
+            top: 0;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: 40vw 50vw;
+            /* grid: 10% 50%; */
+            /* margin: auto; */
+            width: 50vw;
+            font-size: 2em;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+        .page {
+            padding-top: 1em;
+        }
+
+        menu {
+            width: 20vw;
+
+            padding: 1em .5em;
+            margin: 2em;
+            height: fit-content;
+            background-color: var(--col-backer);
+            list-style-type: none;
+        }
+
+        figure {
+            border: 0.05em dashed lightblue;
+            margin: 1em 5%;
+        }
+
+        pre.code {
+            border: 1px solid grey;
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>One page document viewer</h1>
+    </header>
+
+    <main>
+        <menu id="article_menu">
+            <p>Static non JS menu</p>
+            <li><a href="#article2">Hello kitty</a></li>
+            <li><a href="#article2">Article2</a></li>
+        </menu>
+        <div class="page" id="article1">
+            <h2>Hello kitty</h2>
+            <pre class="code" alt="script snippet">
+            <code class="language-javascript">
+    function alama() {
+        let my = "allocate";
+        console.log(my, "hello")
+    }</code>
+        </pre>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt sed illo molestiae autem aliquid dolor
+                esse
+                sit, obcaecati quasi. Repellendus laborum vitae nostrum eius autem excepturi, expedita temporibus
+                animi
+                dignissimos.'
+            </p>
+            <figure>
+                <math>
+                    <mi>a</mi>
+                    <mo>=</mo>
+                    <msqrt>
+                        <msup>
+                            <mi>b</mi>
+                            <mn>2</mn>
+                        </msup>
+                        <mi>+</mi>
+                        <msup>
+                            <mi>c</mi>
+                            <mn>2</mn>
+                        </msup>
+                    </msqrt>
+                </math>
+                <figcaption>
+                    Using Pythagoras' theorem to solve for the hypotenuse <var>a</var> of
+                    a triangle with sides <var>b</var> and <var>c</var>
+                </figcaption>
+            </figure>
+
+            <p>Lortsem ipsem it galomere numgera applicativa. Tuttera ne miklemot
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae veritatis animi commodi fuga
+                aperiam,
+                possimus libero blanditiis soluta nisi perferendis illum in beatae voluptatum voluptate placeat
+                quas.
+                Beatae, sequi tempore!
+            </p>
+        </div>
+        <div class="page " id="article2">
+            <h2>Article 20</h2>
+            <p>Lortsem ipsem it galomere numgera applicativa. Tuttera ne miklemot
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae veritatis animi commodi fuga
+                aperiam,
+                possimus libero blanditiis soluta nisi perferendis illum in beatae voluptatum voluptate placeat
+                quas.
+                Beatae, sequi tempore!
+
+            </p>
+            <p>Lortsem ipsem it galomere numgera applicativa. Tuttera ne miklemot Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Recusandae veritatis animi commodi fuga aperiam, possimus libero blanditiis soluta
+                nisi perferendis illum
+
+            </p>
+
+        </div>
+        <div class="page" id="artt3">
+            <h2>3rd Line</h2>
+            <ul>
+                <li>Lorem</li>
+                <li>Ipsum</li>
+                <li>Doleres</li>
+            </ul>
+        </div>
+    </main>
+    <script>
+
+        const pageClass = "page"
+        const menuClass = "article_menu"
+
+        /** return first found html-element */
+        function firstElement(HtmlElem, tags) {
+            for (tag_name of tags) {
+                for (n of HtmlElem.children) {
+                    if (n.localName == tag_name) {
+                        return n
+                    }
+                }
+            }
+
+        }
+        function deleteChildren(HtmlNode) {
+            HtmlNode.innerHTML = ''
+        }
+
+        // RUntime generated menu from elements
+        // Searches first appearance of header and uses that content as link name
+        function createMenu(articles, menu) {
+
+            for (const article of articles) {
+                let label = firstElement(article, ["h1", "h2", "h3"])
+                let li = document.createElement("li")
+                let but = document.createElement("a")
+                let art_id = article.id
+                but.textContent = label.firstChild.data
+                but.href = `#${art_id}`
+                but.onclick = () => showArticle(article, articles)
+                li.append(but)
+                menu.append(li)
+            }
+        }
+        /** From HTML element list, **/
+        function showArticle(page, HtmlElemList) {
+            let artID = page.id
+            for (const obj of HtmlElemList) {
+                (artID == obj.id) ? obj.removeAttribute("hidden") : obj.setAttribute("hidden", null)
+            }
+        }
+
+        function main() {
+            const ARTICLES = document.getElementsByClassName(pageClass)
+            const page_menu = document.getElementById(menuClass)
+            deleteChildren(page_menu) // remove static link list
+
+            createMenu(ARTICLES, page_menu)
+            showArticle(ARTICLES[0], ARTICLES)
+        }
+        main()
+
+    </script>
+</body>
+
+</html>
