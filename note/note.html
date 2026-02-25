@@ -1,0 +1,165 @@
+<html lang="fi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note-saver</title>
+    <style>
+        :root {
+            --radius: 12px;
+        }
+
+        body {
+            background-color: antiquewhite;
+        }
+
+
+
+        .module {
+            overflow-y: scroll;
+            max-height: 50vh;
+            width: 400px;
+            margin: auto;
+            padding: 1em;
+            background-color: rgb(242, 245, 247);
+            border-radius: var(--radius);
+            margin-bottom: 1em;
+            box-shadow: 2px 2px rgb(214, 207, 207);
+        }
+
+        form {
+            padding: 1em;
+
+            @media screen {
+                label {
+                    display: hidden;
+                }
+            }
+
+            textarea {
+                margin-bottom: .5em;
+
+                display: block;
+                padding: .5em;
+
+                width: 80%;
+                min-height: 30vh;
+            }
+        }
+
+        textarea,
+        input {
+            padding: .5em;
+            display: block;
+            margin-bottom: .5em;
+            border-radius: var(--radius);
+        }
+
+
+
+        button {
+            padding: .5em;
+            background-color: rgb(175, 196, 189);
+            border-radius: 100vw;
+        }
+
+        .notes {
+            max-height: 30vh;
+        }
+
+        .note {
+            border: 1px grey solid;
+            border-radius: 1em;
+            padding: 1em;
+            margin-bottom: 1em;
+
+
+            .header {
+                /* display: flex;
+                flex-wrap: wrap; */
+
+                h3 {
+                    display: inline-block;
+                    margin: 0;
+                }
+
+                button {
+                    /* display: none; */
+                    float: right;
+                }
+
+                button:hover {
+                    background-color: beige;
+                    display: block
+                }
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="note-field" class="module notes">
+        <h2>Notes</h2>
+        <section class="note" id="1772008395189">
+            <div class="header">
+                <h3>Note title</h3>
+                <button>Remove</button>
+            </div>
+
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae expedita cupiditate laboriosam
+                deleniti beatae adipisci. Perferendis esse magnam facilis dolores impedit quod asperiores saepe
+                dignissimos molestiae sint. Voluptates, porro aperiam.
+
+            </p>
+        </section>
+        <section class="note" id="1772008395136">
+            <div class="header">
+                <h3>Older note</h3>
+                <button>Remove</button>
+            </div>
+
+            <p>
+            <ul>
+                <li>Lorem</li>
+                <li>Ipsum</li>
+                <li>dolor sit</li>
+                <li>amet constructere</li>
+            </ul>
+            </p>
+        </section>
+        <section class="note" id="1772008395156">
+            <div class="header">
+                <h3>Older note</h3>
+                <button>Remove</button>
+            </div>
+
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae expedita cupiditate laboriosam
+                deleniti beatae adipisci. Perferendis esse magnam facilis dolores impedit quod asperiores saepe
+                dignissimos molestiae sint. Voluptates, porro aperiam.
+
+            </p>
+        </section>
+    </div>
+
+    <form id="note" class="module">
+        <h2>New note</h2>
+        <label for="title">Title</label>
+        <input type="text" id="note-title" name="title" placeholder="input title" required>
+        <label for="note">note</label>
+        <textarea id="note-content" name="note" placeholder="What you have in your mind today?" required></textarea>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+<script>
+    let note_data_template = {
+        id: Date.now(),
+        t: "Note title",
+        date: "2026-02-12",
+        note: "Whole text in",
+    }
+
+    console.log(note_data_template)
+</script>
+
+</html>
