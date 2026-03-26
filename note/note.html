@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Note-saver</title>
+    <title>Browser Notebook</title>
     <style>
         :root {
             --radius: 12px;
@@ -13,8 +13,6 @@
         body {
             background-color: antiquewhite;
         }
-
-
 
         .module {
             overflow-y: scroll;
@@ -56,8 +54,6 @@
             border-radius: var(--radius);
         }
 
-
-
         button {
             padding: .5em;
             background-color: rgb(175, 196, 189);
@@ -76,8 +72,6 @@
 
 
             .header {
-                /* display: flex;
-                flex-wrap: wrap; */
 
                 h3 {
                     display: inline-block;
@@ -85,7 +79,6 @@
                 }
 
                 button {
-                    /* display: none; */
                     float: right;
                 }
 
@@ -94,14 +87,12 @@
                     display: block
                 }
             }
-
         }
     </style>
 </head>
 
 <body>
     <div id="note-field" class="module notes">
-        <h2>Notes</h2>
         <section class="note" id="1772008395189">
             <div class="header">
                 <h3>This is mockup for static page. JS will remove and render actual content</h3>
@@ -115,12 +106,11 @@
     </div>
 
     <form id="note-editor" class="module">
-        <h2>New note</h2>
         <label for="title">Title</label>
-        <input type="text" id="note-title" name="title" placeholder="input title" required>
-        <label for="note">note</label>
+        <input type="text" id="note-title" name="title" placeholder="Note title" required>
+        <label for="note">Note</label>
         <textarea id="note-content" name="note" placeholder="What you have in your mind today?" required></textarea>
-        <input onsubmit=note_submit type="submit" value="Submit">
+        <input type="submit" value="Submit">
     </form>
 </body>
 
@@ -131,13 +121,6 @@
         get_object() { return JSON.parse(this.FUNC.getItem(this.tag)) }
         put_object(obj) { this.FUNC.setItem(this.tag, JSON.stringify(obj)) }
         delete(bool = false) { (bool) ? this.FUNC.clear(this.tag) : undefined }
-    }
-
-    let note_data_template = {
-        id: Date.now(),
-        t: "Note title",
-        date: new Date().toLocaleString(),
-        note: "Whole text in",
     }
 
     /**Clear value of form element**/
@@ -178,7 +161,6 @@
 
     function remove_note(id) {
         let notes_stor = STORRAGE.get_object()
-
         let notes = notes_stor.notes
         var new_notes = []
         for (let note of notes)
@@ -230,7 +212,6 @@
 
     render_notes()
     submitForm.addEventListener("submit", (e) => { e.preventDefault(); note_submit(title, content, STORRAGE); render_notes() })
-    console.log(note_data_template)
 
 </script>
 
