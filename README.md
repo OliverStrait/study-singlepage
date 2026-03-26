@@ -5,9 +5,9 @@ Personal project collection of every random single-page ideas.
 
 # DONE
 
-- [docarates](/docrates/README.md)
+- [Docarates](/docrates/docrates.html) - [document](/docrates/README.md)
+- [Local Notes](/note/note.html) - [document](/note/README.md)
 
 # Work in progress
 
-- [note](/note/README.md)
 
