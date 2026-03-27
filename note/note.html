@@ -145,7 +145,7 @@
     class NoteStorage extends WebStorage {
         constructor(tag) { super(tag); if (!this.obj) { this.put_object({ ver: 1, notes: [] }) } }
         push_note(obj) { this.obj.notes = [obj].concat(this.obj.notes); this.put_object(this.obj) }
-        delete_note(id) { this.obj.notes.forEach((val, i, array) => { if (val.id == id) array.pop(i) }); this.put_object(this.obj) }
+        delete_note(id) { this.obj.notes.forEach((val, i, array) => { if (val.id == id) array.splice(i, 1); this.put_object(this.obj) }) }
     }
 
     /**Clear value of form element**/
