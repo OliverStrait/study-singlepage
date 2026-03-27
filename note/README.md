@@ -32,5 +32,10 @@ notes: [{
  
 ```
 
-# Additions
+## Additions
 - [ ] Randomly selected note
+
+
+## API documentation
+- WEB API
+    - [parseFromString](https://developer.mozilla.org/en-US/docs/Web/API/DOMParser/parseFromString)

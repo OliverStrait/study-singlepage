@@ -29,18 +29,16 @@
         form {
             padding: 1em;
 
-            @media screen {
+            @media only screen {
                 label {
-                    display: hidden;
+                    display: none;
                 }
             }
 
             textarea {
                 margin-bottom: .5em;
-
                 display: block;
                 padding: .5em;
-
                 width: 80%;
                 min-height: 30vh;
             }
@@ -64,18 +62,22 @@
             max-height: 30vh;
         }
 
-        .note {
+        section.note {
             border: 1px grey solid;
             border-radius: 1em;
             padding: 1em;
             margin-bottom: 1em;
-
+            background-color: white;
 
             .header {
 
                 h3 {
-                    display: inline-block;
                     margin: 0;
+                }
+
+                p {
+                    margin: .3em 0;
+                    font-size: .8em;
                 }
 
                 button {
@@ -87,15 +89,32 @@
                     display: block
                 }
             }
+
+            .note {
+                border-left: 2px solid grey;
+                padding: 0 0 0 .3em;
+            }
+
+            img {
+                max-width: 50%;
+            }
+
+        }
+
+        progress {
+            width: 50%;
+            height: 1em;
+            /* display: ; */
         }
     </style>
 </head>
 
 <body>
+
     <div id="note-field" class="module notes">
         <section class="note" id="1772008395189">
             <div class="header">
-                <h3>This is mockup for static page. JS will remove and render actual content</h3>
+                <h3>This is mockup for static page. JS will remove it and render actual content</h3>
                 <button>Remove</button>
             </div>
 
@@ -109,7 +128,7 @@
         <label for="title">Title</label>
         <input type="text" id="note-title" name="title" placeholder="Note title" required>
         <label for="note">Note</label>
-        <textarea id="note-content" name="note" placeholder="What you have in your mind today?" required></textarea>
+        <textarea id="note-content" name="note" placeholder="What do you have on your mind?" required></textarea>
         <input type="submit" value="Submit">
     </form>
 </body>
@@ -117,101 +136,85 @@
 <script>
     class WebStorage {
         FUNC = localStorage
-        constructor(tag) { this.tag = String(tag); }
-        get_object() { return JSON.parse(this.FUNC.getItem(this.tag)) }
-        put_object(obj) { this.FUNC.setItem(this.tag, JSON.stringify(obj)) }
-        delete(bool = false) { (bool) ? this.FUNC.clear(this.tag) : undefined }
+        constructor(tag) { this.tag = String(tag); this.obj = {}; this.get_object() }
+        get_object() { this.obj = JSON.parse(this.FUNC.getItem(this.tag)); return this.obj }
+        put_object(obj) { this.obj = obj; this.FUNC.setItem(this.tag, JSON.stringify(obj)) }
+        delete(bool = false) { (bool) ? this.FUNC.clear(this.tag) : undefined; this.obj = {} }
+        get_bytes() { return new Blob(Object.entries(this.FUNC)).size }
+    }
+    class NoteStorage extends WebStorage {
+        constructor(tag) { super(tag); if (!this.obj) { this.put_object({ ver: 1, notes: [] }) } }
+        push_note(obj) { this.obj.notes = [obj].concat(this.obj.notes); this.put_object(this.obj) }
+        delete_note(id) { this.obj.notes.forEach((val, i, array) => { if (val.id == id) array.pop(i) }); this.put_object(this.obj) }
     }
 
     /**Clear value of form element**/
-    const clearVal = (DOM_LIST) => {
-        DOM_LIST.forEach((a) => a.value = "")
-    }
+    const clearVal = (DOM_LIST) => { DOM_LIST.forEach((a) => a.value = "") }
 
-    function smoothScrollId(id) {
-        let elem = document.getElementById(id)
-        elem?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
-    }
+    function smoothScrollId(id) { document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" }) }
 
-    const note_submit = (title, content, Storrage) => {
-        let notes = Storrage.get_object()
-        console.log(notes.notes)
-        let obj = {
+    const submit_note = (title, content, storage) => {
+        storage.push_note({
             id: Date.now(),
             t: title.value,
             date: new Date().toLocaleString(),
-            n: content.value.replace(/\n|\r/gm, "<br/>")
-        }
-        notes.notes = [obj].concat(notes.notes)
-        Storrage.put_object(notes)
+            n: content.value
+        })
         clearVal([title, content])
     }
 
-    const STORRAGE = new WebStorage("notes")
-    let oldNotes = STORRAGE.get_object()
-    if (!oldNotes) {
-        newNotes = { ver: 1, notes: [] }
-        STORRAGE.put_object(newNotes)
-    }
-
+    const STORRAGE = new NoteStorage("notes")
     const submitForm = document.getElementById("note-editor")
     const note_field = document.getElementById("note-field")
     const title = document.getElementById("note-title")
     const content = document.getElementById("note-content")
 
-    function remove_note(id) {
-        let notes_stor = STORRAGE.get_object()
-        let notes = notes_stor.notes
-        var new_notes = []
-        for (let note of notes)
-            if (!(note.id == id)) new_notes.push(note)
-        notes_stor.notes = new_notes
-        STORRAGE.put_object(notes_stor)
-        render_notes()
-    }
-
+    const elemWithText = (tag, text) => { let el = document.createElement(tag); el.textContent = text; return el }
+    const appendManyChild = (parent, children) => { children.forEach((val) => parent.appendChild(val)) }
     const render_notes = () => {
         note_field.innerHTML = ""
+        var notes = STORRAGE.get_object().notes
+        if (notes.length > 0) {
 
-        let notes = STORRAGE.get_object().notes
+            let prog = document.createElement("progress")
+            let used = STORRAGE.get_bytes()
+            prog.value = used
+            prog.max = 5000000
+            prog.textContent = used / 5000000 + "%"
+            note_field.appendChild(prog)
 
-        for (let note of notes) {
+            for (let note of notes) {
+                let sect = document.createElement("section")
+                sect.id = note.id
+                sect.classList.add("note")
+                note_field.appendChild(sect)
+                //header
+                {
+                    let header = document.createElement("div")
+                    header.classList.add("header")
+                    sect.appendChild(header)
+                    let remove_button = elemWithText("button", "Remove")
+                    remove_button.addEventListener("click", () => { STORRAGE.delete_note(note.id); render_notes() })
+                    appendManyChild(header, [remove_button, elemWithText("h3", note.t), elemWithText("p", note.date)])
+                }
+                // NOTE
+                {
+                    let note_str = "<div class='note'>" + note.n.replace(/(?![>])\n(?![<])/gm, "<br/>") + "</div>"
 
-            let sect = document.createElement("section")
-            sect.id = note.id
-            sect.classList.add("note")
-            note_field.appendChild(sect)
-            //header
-            {
-                let header = document.createElement("div")
-                header.classList.add("header")
-                sect.appendChild(header)
-                let title = document.createElement("h3")
-                title.textContent = note.t
-                let date = document.createElement("p")
-                date.textContent = note.date
-                let remove_button = document.createElement("button")
-                remove_button.textContent = "Remove"
-                remove_button.addEventListener("click", () => remove_note(note.id))
-                header.appendChild(date)
-                header.appendChild(remove_button)
-                header.appendChild(title)
-
+                    let note_content = new DOMParser().parseFromString(note_str, "text/html")
+                    if (note.t == "Hello") {
+                        console.log("koi", note_str, note_content.getElementsByTagName("body")[0].children)
+                        console.log(note_content.getElementsByTagName("body")[0].firstChild.childNodes)
+                    }
+                    sect.appendChild(note_content.getElementsByTagName("body")[0].firstChild)
+                }
             }
-
-            // NOTE
-            {
-                let note_str = "<p class='note'>" + note.n + "</p>"
-                let parser = new DOMParser()
-                let note_content = parser.parseFromString(note_str, "text/html")
-                sect.appendChild(note_content.getElementsByClassName("note")[0])
-            }
+            smoothScrollId(notes[0].id)
         }
-        if (notes.length > 0) smoothScrollId(notes[0].id)
     }
 
     render_notes()
-    submitForm.addEventListener("submit", (e) => { e.preventDefault(); note_submit(title, content, STORRAGE); render_notes() })
+    submitForm.addEventListener("submit", (e) => { e.preventDefault(); submit_note(title, content, STORRAGE); render_notes() })
 
 </script>
 
