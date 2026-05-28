@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style1.css">
+    <title>CV template study</title>
+    <script src="template_builder.js"></script>
+</head>
+
+<body>
+    <main>
+        <aside class="desc">
+
+            <div class="hero-image">
+                <img class="circular" src="face.jpg">
+            </div>
+            <h3>Stratos Olivia</h3>
+
+            <div id="personal-info" class="personal-info"></div>
+            <div id="side_links" class="link-list"></div>
+            <div id="side_harrastukset" class="link-list"></div>
+
+        </aside>
+        <article>
+            <section class="story module">
+                <h2>Static description</h2>
+                <p>Lorem master, ipsum ipsum, dolor sit amet consectetur adipisicing elit. Odit quasi est ut placeat.
+                    Ad, atque quod
+                    possimus, exercitationem nam totam ipsam officia id alias, vitae nesciunt animi vero veritatis
+                    optio.</p>
+            </section>
+            <div class="year-list module" id="it-taidot">
+                <!-- Runtime content -->
+                <noscript>
+                    <p>content is rendered with Javascript</p>
+                </noscript>
+            </div>
+
+            <div class="year-list module" id="education"></div>
+            <div class="year-list module" id="courses"></div>
+
+
+        </article>
+
+    </main>
+    <p class="footer note">Document rendered with: Html, Css, JavaScript
+        Json</p>
+
+</body>
+
+<div id="templates">
+    <div temp="link_list">
+        <h4 temp="title" class="side-header"></h4>
+        <ul temp="ul" class="colort">
+            <li temp="list">
+                <a temp="link"></a>
+
+            </li>
+        </ul>
+    </div>
+
+    <!-- list of detail info with possible link -->
+    <div temp="detail_info">
+        <ul temp="list">
+            <li temp="content">
+                <b temp="title"></b>
+                <a temp="link"></a>
+            </li>
+        </ul>
+    </div>
+
+    <div temp="skill_listing">
+        <h3 temp="title"></h3>
+        <ul temp="list">
+            <li temp="item">
+                <span class="year" temp=year> </span>
+                <p temp="content">
+                    <a temp="link"></a>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    const personINFO = {
+        title: "Personal Info",
+        content: [
+            { name: "City", cont: "Utopia" },
+            { name: "Email", cont: "stratos.olivia@example.com", url: "stratos.olivia@example.com" },
+            { name: "Phone", cont: "011011011", url: "tel:011011011" },
+            { name: "Born", cont: "to be wild", }
+        ]
+    }
+    const personal_links = {
+        title: "Linkkejä",
+        content: [
+            { name: "github", url: "https://github.com/OliverStrait" },
+            // {name: "linkedIn", url: "" }
+        ]
+    }
+    const languages = {
+        title: "Language",
+        content: [
+            ["spanish", "in my imagination"],
+            ["english", "very good my pal, very good"]]
+    }
+    const programming = {
+        title: "Programming and ...",
+        ingress: "Steady understanding of different computer systems and...",
+        content: [
+            { name: "HTML, CSS", desc: " Great manipulation skills" },
+            { name: "Git ja github", desc: "Git is good" },
+            { name: "Dokumentointi", desc: "Documentation is most important skill to build scalable software-systems." }
+        ]
+    }
+    const edu = {
+        title: "Education",
+        content: [{
+            start: "10/1885",
+            end: "3/1887",
+            end_year: "1887",
+            desc: "Data mining like my grand-grand father",
+            institution: "Imaginarium Dream institute"
+        },
+        {
+            start: "1456", end: "1462",
+            end_year: "1462",
+            desc: "Advanbced Dream studies",
+            institution: "Imaginarium Dream institute"
+        }
+        ]
+    }
+    const kurssit = {
+        title: "Muut kurssit:",
+        content: [
+            {
+                start: "8/2025", end: "9/2025", end_year: "2025", desc: "Demele Lipre an Dulorem ups etre",
+                url: "#"
+            },
+            {
+                start: "2/2017", end: "5/2085", end_year: "2085", desc: "Addvan. Impluse Lorem ipsem ",
+                url: "#"
+            }
+        ]
+
+    }
+    const harrastukset = {
+        title: "Harrastukset",
+        content: [
+            { name: "climbing", desc: "Mountains are just little hills" }, { name: "data-mining", desc: "For breakfast" }, { name: "psychology" }
+        ]
+    }
+    const TEMPLATES = Template.createRootTemplate("templates")
+
+    function LINK_LIST(parent, template, { data }) {
+        const [ulListT, listT, linkT] = template.get_tree(["ul", "list", "link"])
+
+        if (data?.title) {
+            let t = parent.appendChild(template.title.new())
+            t.textContent = data.title
+        }
+        let list = parent.appendChild(ulListT.new())
+        for (let obj of data.content) {
+            let li = list.appendChild(listT.new())
+            if (obj?.url) {
+                let link = li.appendChild(linkT.new())
+                link.textContent = obj.name
+                link.href = obj.url
+            }
+            else {
+                li.textContent = obj.name
+            }
+            if (obj?.desc) {
+                li.textContent = li.textContent + " - " + obj.desc
+            }
+        }
+    }
+
+
+    function gen_PersonInfo(parent, template, { data }) {
+        const [Tlist, Tcontent, Ttitle] = template.get_tree(["list", "content", "title"])
+
+        let list = parent.appendChild(Tlist.new())
+
+        for (obj of data.content) {
+            let li = list.appendChild(Tcontent.new())
+            let title = li.appendChild(Ttitle.new())
+            title.textContent = obj.name + ": "
+
+            if (obj?.url) {
+                let link = li.appendChild(Tcontent.link.new())
+                link.textContent = obj.cont
+                link.href = obj.url
+            } else li.appendChild(document.createTextNode(obj.cont))
+        }
+    }
+
+
+
+    function gen_year_education(parent, template, { data }) {
+        const [Tlist, Titem, Tcontent, Tlink] = template.get_tree(["list", "item", "content", "link"])
+
+        if (data.title) {
+            let t = parent.appendChild(document.createElement("h3"))
+            t.textContent = data.title
+        }
+
+        let list = parent.appendChild(Tlist.new())
+
+        for (obj of data.content) {
+            let li = list.appendChild(Titem.new())
+            let y = li.appendChild(Titem.year.new())
+            y.textContent = obj.end_year
+            var text = li.appendChild(Tcontent.new())
+            var description = obj.desc
+            if (obj?.url) {
+                link = text.appendChild(Tcontent.link.new())
+                link.href = obj.url
+                link.textContent = description
+            }
+            else text.textContent = description + (obj?.institution ? " | " + obj.institution : "")
+
+            p = document.createElement("p")
+            p.textContent = obj.start + " - " + obj.end
+            li.appendChild(p)
+            list.appendChild(li)
+        }
+
+    }
+    function gen_taidot(parent, template, { data }) {
+        const [Tlist, Titem, Tcontent, Tlink] = template.get_tree(["list", "item", "content", "link"])
+        if (data?.title) {
+            let t = parent.appendChild(template.title.new())
+            t.textContent = data.title
+        }
+        let list = parent.appendChild(Tlist.new())
+        for (let obj of data.content) {
+            let li = list.appendChild(Titem.new())
+            let p = li.appendChild(Tcontent.new())
+            p.textContent = obj.name + ": " + obj.desc
+        }
+    }
+
+
+    TEMPLATES.link_list.operate(
+        document.getElementById("side_links"),
+        { data: personal_links },
+        LINK_LIST
+    )
+    TEMPLATES.link_list.operate(document.getElementById("side_harrastukset"),
+        { data: harrastukset }, LINK_LIST
+    )
+    TEMPLATES.detail_info.operate(document.getElementById("personal-info"),
+        { data: personINFO }, gen_PersonInfo
+    )
+
+    TEMPLATES.skill_listing.operate(
+        document.getElementById("it-taidot"),
+        { data: programming },
+        gen_taidot
+    )
+    TEMPLATES.skill_listing.operate(document.getElementById("education"),
+        { data: edu }, gen_year_education)
+    TEMPLATES.skill_listing.operate(document.getElementById("courses"),
+        { data: kurssit }, gen_year_education)
+</script>
+
+</html>

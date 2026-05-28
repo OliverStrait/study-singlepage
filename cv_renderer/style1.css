@@ -1,0 +1,166 @@
+        :root {
+            --col-body-bg: rgb(50, 67, 87);
+            --col-highlight: rgb(97, 170, 154);
+            --col-module-bg: rgb(207, 202, 189);
+            --col-a: green;
+            --collas: oklch(44.226% 0.00005 271.152);
+
+            --col-sidebar: rgb(112, 138, 145);
+            /* --col-sidebar: rgb(31, 61, 70); */
+            --col-light-block: color-mix(in lch, var(--col-sidebar),
+                    rgb(255, 255, 255));
+            --main-width: 70vw;
+            --side-width: 30vw;
+            --margin: 4em;
+        }
+
+        body {
+            margin: 0;
+
+
+        }
+
+        main {
+            background-color: rgb(221, 206, 206);
+            min-height: 96vh;
+            display: grid;
+            grid-template-columns: var(--side-width) var(--main-width);
+            /* flex-flow: wrap row; */
+            /* align-content: space-evenly; */
+        }
+
+        .year-list {
+            font-size: 1rem;
+            --min-height: 1em;
+            --col-first-child: rgb(245, 233, 219);
+            --col-other-children: rgb(201, 194, 185);
+
+            --col-module-bg: rgb(192, 190, 190);
+            --border-radius: 25px;
+
+            li {
+                /* border: 1px solid grey; */
+                min-height: var(--min-height);
+                font-size: 1em;
+                padding-bottom: .3em;
+                list-style-type: none;
+                background-color: var(--col-other-children);
+                align-content: center;
+                border-top: 1px solid black;
+                padding-top: .1em;
+
+                .year {
+                    float: left;
+                    max-height: var(--min-height);
+                    /* content: attr(data-year); */
+                    background-color: var(--col-highlight);
+                    margin: .1em 0 0 .5em;
+                    border: solid 1.5px rgb(129, 129, 129);
+                    border-radius: 100vw;
+                    padding: .3em .4em;
+                    font-family: Garamond;
+                    font-size: 1.1em;
+                }
+
+                p {
+                    margin: 0 calc(var(--border-radius) / 2) .2em var(--margin);
+
+                }
+            }
+
+            ul,
+            ol {
+                margin: 0;
+            }
+
+            li:first-child {
+                background-color: var(--col-first-child);
+                border-radius: var(--border-radius) var(--border-radius) 0 0;
+                border: 0;
+            }
+
+            a {
+                color: rgb(6, 49, 190);
+            }
+
+
+        }
+
+        .module {
+            /* min-width: 40vw;
+            max-width: 50vw; */
+
+            width: calc(var(--main-width)* 0.8);
+            background-color: var(--col-module-bg);
+            border: 2px solid black;
+            border-radius: 20px;
+            padding: 1rem;
+            margin: .5em auto 0 auto;
+
+            h3,
+            h4,
+            h5 {
+                margin: 0 0 .2em calc(var(--margin)/3);
+            }
+        }
+
+        body {
+            background-color: var(--col-body-bg);
+        }
+
+        .desc {
+            background-color: var(--col-sidebar);
+            padding: 1em;
+        }
+
+        .story {
+            background-color: var(--col-light-block);
+            min-height: 100px;
+        }
+
+        aside {
+            /* --col-sidebar: rgb(6, 41, 51); */
+            text-align: center;
+            /* background-color: var(--col-sidebar); */
+
+            a {
+                color: lch(from var(--col-sidebar) calc(l + 30) c h);
+            }
+        }
+
+        .hero-image {
+            --height: min(180px, 20vw);
+            margin: auto;
+            position: relative;
+            width: var(--height);
+            height: var(--height);
+            overflow: hidden;
+            border-radius: 50%;
+            outline: .5px dashed cyan;
+
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        .link-list,
+        .personal-info {
+            text-align: left;
+            margin: auto;
+        }
+
+        ul,
+        ol {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        p.footer {
+            font-style: italic;
+            font-family: Garamond;
+            padding: 2px;
+            margin: 0px;
+            height: 4vh;
+        }
