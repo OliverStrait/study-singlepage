@@ -21,7 +21,19 @@ class DataTemplateElement extends HTMLElement {
         return document.getElementById(id).content.cloneNode(true)
     }
 }
-
+function link_or_bold(url, name, item) {
+    const link = item.querySelector("a")
+    const bold = item.querySelector("b")
+    if (url) {
+        link.href = url;
+        link.textContent = name ?? "";
+        bold.remove()
+    }
+    else {
+        bold.textContent = name;
+        link.remove()
+    }
+}
 class CvLinkList extends DataTemplateElement {
     render() {
         if (!this.isConnected || !this.data) return
@@ -34,16 +46,10 @@ class CvLinkList extends DataTemplateElement {
 
         for (const entry of this.data.content ?? []) {
             const item = this.templateContent("link-list-item-template").firstElementChild
-            const link = item.querySelector("a")
+            // const text = item.querySelector("li")
+            link_or_bold(entry?.url, entry.name, item)
 
-            if (entry.url) {
-                link.href = entry.url
-                link.textContent = entry.name
-            } else {
-                link.remove()
-                item.append(document.createTextNode(entry.name ?? ""))
-            }
-            if (entry.desc) item.append(document.createTextNode(` - ${entry.desc}`))
+            item.append(`: ${entry.desc ?? ""}`)
             list.append(item)
         }
 
@@ -91,20 +97,9 @@ class CvSkillList extends DataTemplateElement {
         for (const entry of this.data.content ?? []) {
             const item = this.templateContent("skill-item-template").firstElementChild
             const text = item.querySelector("p")
-            const link = text.querySelector("a");
-            const bold = text.querySelector("b")
+            link_or_bold(entry?.url, entry.name, text)
 
-            if (entry?.url) {
-                link.href = entry.url;
-                link.textContent = entry.name ?? "";
-                bold.remove()
-            }
-            else {
-                text.querySelector("b").textContent = entry.name;
-                link.remove()
-            }
-            text.append(`: ${entry.desc ?? ""}`)
-            // item.querySelector("p").textContent = `${entry.name ?? ""}: ${entry.desc ?? ""}`
+            text.append(`: ${entry.desc ?? " "}`)
             list.append(item)
         }
 
@@ -144,7 +139,35 @@ class CvTimelineList extends DataTemplateElement {
     }
 }
 
+class CvStylePicker extends HTMLElement {
+    constructor() {
+        super()
+        this.handleChange = () => {
+            this.style_link.setAttribute("href", this.select.value)
+        }
+        this.select = this.querySelector("select")
+        this.style_link = document.getElementById("theme-stylesheet")
+    }
+
+    connectedCallback() {
+        const stylesheet = this.style_link
+        const select = this.select
+        if (!stylesheet || !select) return
+
+        select.value = this.style_link.getAttribute("href")
+        select.addEventListener("change", this.handleChange)
+    }
+
+    disconnectedCallback() {
+        this.querySelector("select")
+            ?.removeEventListener("change", this.handleChange)
+    }
+
+
+}
+
 customElements.define("cv-link-list", CvLinkList)
 customElements.define("cv-personal-info", CvPersonalInfo)
 customElements.define("cv-skill-list", CvSkillList)
 customElements.define("cv-timeline-list", CvTimelineList)
+customElements.define("cv-style-picker", CvStylePicker)

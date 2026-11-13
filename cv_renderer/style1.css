@@ -38,12 +38,6 @@ a:visited {
     color: var(--col-link-visited);
 }
 
-cv-link-list,
-cv-personal-info,
-cv-skill-list,
-cv-timeline-list {
-    display: block;
-}
 
 main {
     /* background-color: rgb(221, 206, 206); */
@@ -158,8 +152,33 @@ aside {
         color: lch(from var(--col-sidebar) calc(l + 30) c h);
     }
 
-    ul {
-        margin-top: .5em
+    cv-link-list li {
+        margin-top: .5em;
+
+        &::before {
+            content: ">";
+            font-size: 1.1rem;
+            margin-right: 1ch;
+        }
+    }
+
+}
+
+cv-style-picker {
+    display: block;
+    margin: 1rem 0 1.5rem;
+    text-align: left;
+
+    label {
+        display: grid;
+        gap: .35rem;
+        font-size: .85rem;
+    }
+
+    select {
+        max-width: 100%;
+        padding: .45rem .6rem;
+        font: inherit;
     }
 }
 
@@ -259,6 +278,10 @@ p.footer {
     p {
         orphans: 3;
         widows: 3;
+    }
+
+    cv-style-picker {
+        display: none;
     }
 }
 

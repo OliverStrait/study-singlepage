@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style1.css">
+    <link id="theme-base" rel="stylesheet" href="base.css">
+    <link id="theme-stylesheet" rel="stylesheet" href="style2.css">
     <title>CV template study</title>
 </head>
 
@@ -13,10 +14,22 @@
         <aside class="desc">
 
             <div class="hero-image">
-                <img class="circular" src="face.jpg">
+                <img class="circular"
+                    src="https://upload.wikimedia.org/wikipedia/commons/6/68/Orange_tabby_cat_sitting_on_fallen_leaves-Hisashi-01A.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original"
+                    title="CC BY-SA 2.0 Hisashi ">
             </div>
             <h3>Stratos Olivia</h3>
 
+            <cv-style-picker>
+                <label>
+                    Appearance
+                    <select aria-label="Choose appearance">
+                        <option value="style1.css">Classic</option>
+                        <option value="style2.css" selected>Modern</option>
+                        <option value="style3.css">Synthwave '80s</option>
+                    </select>
+                </label>
+            </cv-style-picker>
             <cv-personal-info id="personal-info" class="personal-info"></cv-personal-info>
             <cv-link-list id="side_links" class="link-list"></cv-link-list>
             <cv-link-list id="side_harrastukset" class="link-list"></cv-link-list>
@@ -52,7 +65,7 @@
         <ul class="colort"></ul>
     </template>
     <template id="link-list-item-template">
-        <li><a></a></li>
+        <li><a></a><b></b></li>
     </template>
     <template id="personal-info-template">
         <ul></ul>

@@ -1,0 +1,333 @@
+:root {
+    --ink: #edf5ff;
+    --muted: #a4b0d6;
+    --col-body-bg: #080a20;
+    --col-sidebar: #11102f;
+    --col-module-bg: #12142f;
+    --col-highlight: #ff4fd8;
+    --col-light-block: #171735;
+    --col-first-child: #191a3e;
+    --col-other-children: #11132e;
+    --col-link-base: #53f7ed;
+    --col-link-visited: #ff8be7;
+    --side-width: 30%;
+    --main-width: 70%;
+    --margin: 2.25em;
+    color: var(--ink);
+    font-family: "Trebuchet MS", "Courier New", sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: var(--col-body-bg);
+    background-image:
+        linear-gradient(rgb(83 247 237 / 5%) 1px, transparent 1px),
+        linear-gradient(90deg, rgb(83 247 237 / 5%) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+a {
+    color: var(--col-link-base);
+    text-decoration-thickness: .08em;
+    text-underline-offset: .18em;
+    text-shadow: 0 0 8px rgb(83 247 237 / 35%);
+}
+
+a:visited {
+    color: var(--col-link-visited);
+}
+
+main {
+    display: grid;
+    grid-template-columns: minmax(230px, var(--side-width)) minmax(0, var(--main-width));
+    min-height: 100vh;
+}
+
+aside {
+    min-width: 0;
+    min-height: 100vh;
+    padding: 2.5rem clamp(1.25rem, 3vw, 3rem);
+    border-right: 1px solid rgb(83 247 237 / 70%);
+    background: linear-gradient(155deg, #17143d, var(--col-sidebar) 58%, #10152d);
+    box-shadow: 5px 0 24px rgb(83 247 237 / 10%);
+    color: #e8edff;
+    text-align: left;
+}
+
+aside h3 {
+    margin: 1.25rem 0 .4rem;
+    color: #ffffff;
+    font-family: "Courier New", monospace;
+    font-size: 1.55rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-shadow: 2px 2px 0 #b42c9f, 0 0 14px rgb(255 79 216 / 45%);
+}
+
+aside h4 {
+    margin: 1.5rem 0 .35rem;
+    color: #ff79e2;
+    font-family: "Courier New", monospace;
+    font-size: .78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+aside a {
+    color: #a3fff7;
+}
+
+aside a:visited {
+    color: #ffc0f1;
+}
+
+aside ul,
+article ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+aside li {
+    margin: .4rem 0;
+}
+
+aside cv-link-list li::before {
+    content: ">";
+    margin-right: .55rem;
+    color: #ff4fd8;
+    text-shadow: 0 0 8px rgb(255 79 216 / 60%);
+}
+
+article {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 4.5rem) clamp(1.25rem, 5vw, 5rem);
+    background-image: linear-gradient(transparent 31px, rgb(255 79 216 / 10%) 32px);
+    background-size: 100% 32px;
+}
+
+.hero-image {
+    width: min(180px, 42vw);
+    aspect-ratio: 1;
+    margin: 0;
+    overflow: hidden;
+    border: 2px solid #53f7ed;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #53f7ed, 0 0 22px rgb(83 247 237 / 40%);
+}
+
+.hero-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.module {
+    width: 100%;
+    margin: 0 0 1.1rem;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid rgb(83 247 237 / 55%);
+    border-left: 3px solid var(--col-highlight);
+    border-radius: 3px;
+    background: rgb(18 20 47 / 94%);
+    box-shadow: 0 0 14px rgb(83 247 237 / 8%), inset 0 0 18px rgb(255 79 216 / 4%);
+}
+
+.module h3,
+.module h2 {
+    margin: 0 0 .85rem;
+    color: #ffffff;
+    font-family: "Courier New", monospace;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.25;
+    text-shadow: 0 0 10px rgb(83 247 237 / 35%);
+}
+
+.story {
+    border-left-color: #53f7ed;
+    background: linear-gradient(110deg, #171735, #12142f 72%);
+}
+
+.story p {
+    max-width: 68ch;
+    margin: 0;
+}
+
+.year-list li {
+    min-height: 1em;
+    padding: .8rem 0 .7rem;
+    border-top: 1px solid rgb(164 176 214 / 26%);
+    background: transparent;
+}
+
+.year-list li:first-child {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+}
+
+.year-list .year {
+    float: left;
+    margin: .1rem .7rem 0 0;
+    padding: .12rem .55rem;
+    border: 1px solid #53f7ed;
+    border-radius: 2px;
+    background: #102b3a;
+    color: #a3fff7;
+    font-family: "Courier New", monospace;
+    font-size: .85rem;
+    text-shadow: 0 0 6px rgb(83 247 237 / 45%);
+}
+
+.year-list p {
+    margin: 0 0 .2rem var(--margin);
+}
+
+.year-list .period {
+    color: var(--muted);
+    font-size: .88rem;
+}
+
+.skill-listing li {
+    padding: .45rem 0;
+}
+
+.skill-listing p {
+    margin: 0;
+}
+
+.skill-listing b {
+    color: #ff79e2;
+}
+
+.link-list,
+.personal-info {
+    text-align: left;
+}
+
+.footer {
+    margin: 0;
+    padding: .6rem 1rem;
+    border-top: 1px solid #53f7ed;
+    background: #090b22;
+    color: #c8d1ef;
+    font-family: "Courier New", monospace;
+    font-size: .82rem;
+}
+
+cv-style-picker {
+    display: block;
+    margin: 1.5rem 0 1.75rem;
+}
+
+cv-style-picker label {
+    display: grid;
+    gap: .4rem;
+    color: #ff9be9;
+    font-family: "Courier New", monospace;
+    font-size: .78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+cv-style-picker select {
+    width: 100%;
+    padding: .6rem .7rem;
+    border: 1px solid #53f7ed;
+    border-radius: 2px;
+    background: #090b22;
+    color: #a3fff7;
+    font: inherit;
+    text-transform: none;
+}
+
+@media (max-width: 720px) {
+    main {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    aside {
+        min-height: 0;
+        padding: 1.5rem;
+        border-right: 0;
+        border-bottom: 1px solid rgb(83 247 237 / 70%);
+    }
+
+    .hero-image {
+        width: min(140px, 35vw);
+    }
+
+    article {
+        padding: 1.25rem .75rem;
+    }
+
+    .module {
+        padding: 1rem .75rem;
+    }
+}
+
+@page {
+    margin: 12mm;
+}
+
+@media print {
+
+    body,
+    main,
+    aside,
+    article,
+    .module {
+        background: #ffffff;
+        color: #000000;
+        box-shadow: none;
+    }
+
+    main {
+        min-height: 0;
+        grid-template-columns: minmax(0, 30%) minmax(0, 70%);
+    }
+
+    aside,
+    article {
+        min-width: 0;
+        padding: .5rem;
+        border-color: #000000;
+    }
+
+    aside h3,
+    aside h4,
+    aside a,
+    aside a:visited,
+    .module h2,
+    .module h3,
+    .year-list .year {
+        color: #000000;
+        text-shadow: none;
+    }
+
+    cv-style-picker {
+        display: none;
+    }
+
+    .module {
+        box-sizing: border-box;
+        width: 100%;
+        margin: .5rem 0;
+        padding: .75rem;
+        break-inside: avoid-page;
+        page-break-inside: avoid;
+    }
+
+    .year-list li {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}

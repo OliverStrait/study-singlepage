@@ -1,0 +1,306 @@
+:root {
+    --ink: #1d302b;
+    --muted: #64746e;
+    --col-body-bg: #f1f5f2;
+    --col-sidebar: #184b3f;
+    --col-module-bg: #ffffff;
+    --col-highlight: #e87959;
+    --col-light-block: #e6efea;
+    --col-first-child: #f7faf8;
+    --col-other-children: #ffffff;
+    --col-link-base: #b84d35;
+    --col-link-visited: #795b68;
+    --side-width: 30%;
+    --main-width: 70%;
+    --margin: 2.25em;
+    color: var(--ink);
+    font-family: "Trebuchet MS", "Aptos", sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--col-body-bg);
+}
+
+a {
+    color: var(--col-link-base);
+    text-decoration-thickness: .08em;
+    text-underline-offset: .16em;
+}
+
+a:visited {
+    color: var(--col-link-visited);
+}
+
+main {
+    display: grid;
+    grid-template-columns: minmax(230px, var(--side-width)) minmax(0, var(--main-width));
+    min-height: 100vh;
+}
+
+aside {
+    min-width: 0;
+    min-height: 100vh;
+    padding: 2.5rem clamp(1.25rem, 3vw, 3rem);
+    color: #f4f4eb;
+    background: var(--col-sidebar);
+    text-align: left;
+}
+
+aside h3 {
+    margin: 1.25rem 0 .4rem;
+    color: #ffffff;
+    font-family: Georgia, "Palatino Linotype", serif;
+    font-size: 1.8rem;
+    font-weight: 500;
+    line-height: 1.15;
+}
+
+aside h4 {
+    margin: 1.4rem 0 .35rem;
+    color: #eab49f;
+    font-size: .75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+aside a {
+    color: #fff2dd;
+}
+
+aside a:visited {
+    color: #ecd3e5;
+}
+
+aside ul,
+article ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+aside li {
+    margin: .35rem 0;
+}
+
+aside cv-link-list li::before {
+    content: "+";
+    margin-right: .55rem;
+    color: #f39b78;
+}
+
+article {
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 4.5rem) clamp(1.25rem, 5vw, 5rem);
+}
+
+.hero-image {
+    width: min(180px, 42vw);
+    aspect-ratio: 1;
+    margin: 0;
+    overflow: hidden;
+    border: 3px solid rgb(255 255 255 / 28%);
+    border-radius: 50%;
+}
+
+.hero-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.module {
+    width: 100%;
+    margin: 0 0 1.1rem;
+    padding: 1.25rem 1.5rem;
+    border: 0;
+    border-top: 2px solid var(--ink);
+    border-radius: 0;
+    background: transparent;
+}
+
+.module h3,
+.module h2 {
+    margin: 0 0 .85rem;
+    font-family: Georgia, "Palatino Linotype", serif;
+    font-size: 1.45rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.story {
+    padding-left: 1.5rem;
+    border-top: 0;
+    border-left: 4px solid var(--col-highlight);
+    background: var(--col-light-block);
+}
+
+.story p {
+    max-width: 68ch;
+    margin: 0;
+}
+
+.year-list li {
+    min-height: 1em;
+    padding: .8rem 0 .7rem;
+    border-top: 1px solid #c9d4ce;
+    background: transparent;
+}
+
+.year-list li:first-child {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+}
+
+.year-list .year {
+    float: left;
+    margin: .1rem .7rem 0 0;
+    padding: .12rem .55rem;
+    border-radius: 2px;
+    background: var(--col-highlight);
+    color: #251f1b;
+    font-family: Georgia, "Palatino Linotype", serif;
+    font-size: .9rem;
+}
+
+.year-list p {
+    margin: 0 0 .2rem var(--margin);
+}
+
+.year-list .period {
+    color: var(--muted);
+    font-size: .88rem;
+}
+
+.skill-listing li {
+    padding: .45rem 0;
+}
+
+.skill-listing p {
+    margin: 0;
+}
+
+.skill-listing b {
+    color: var(--col-link-base);
+}
+
+.link-list,
+.personal-info {
+    text-align: left;
+}
+
+.footer {
+    margin: 0;
+    padding: .6rem 1rem;
+    background: #243a34;
+    color: #f2f4ee;
+    font-family: Georgia, "Palatino Linotype", serif;
+    font-size: .85rem;
+}
+
+cv-style-picker {
+    margin: 1.5rem 0 1.75rem;
+}
+
+cv-style-picker label {
+    display: grid;
+    gap: .4rem;
+    color: #d9e8df;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+cv-style-picker select {
+    width: 100%;
+    padding: .6rem .7rem;
+    border: 1px solid rgb(255 255 255 / 35%);
+    border-radius: 2px;
+    background: #f4f4eb;
+    color: var(--ink);
+    font: inherit;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+@media (max-width: 720px) {
+    main {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    aside {
+        min-height: 0;
+        padding: 1.5rem;
+    }
+
+    .hero-image {
+        width: min(140px, 35vw);
+    }
+
+    article {
+        padding: 1.25rem .75rem;
+    }
+
+    .module {
+        padding: 1rem .75rem;
+    }
+}
+
+@page {
+    margin: 12mm;
+}
+
+@media print {
+
+    body,
+    main,
+    aside {
+        background: #ffffff;
+        color: #000000;
+    }
+
+    main {
+        min-height: 0;
+        grid-template-columns: minmax(0, 30%) minmax(0, 70%);
+    }
+
+    aside,
+    article {
+        min-width: 0;
+        padding: .5rem;
+    }
+
+    aside h3,
+    aside h4,
+    aside a,
+    aside a:visited {
+        color: #000000;
+    }
+
+    cv-style-picker {
+        display: none;
+    }
+
+    .module {
+        box-sizing: border-box;
+        width: 100%;
+        margin: .5rem 0;
+        padding: .75rem;
+        break-inside: avoid-page;
+        page-break-inside: avoid;
+    }
+
+    .year-list li {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}

@@ -1,0 +1,14 @@
+cv-link-list,
+cv-personal-info,
+cv-skill-list,
+cv-timeline-list {
+    display: block;
+}
+
+
+@media print {
+
+    cv-style-picker {
+        display: none;
+    }
+}
