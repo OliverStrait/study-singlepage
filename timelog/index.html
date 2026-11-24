@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="fi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f4ef">
+  <title>Viikkokello — työajan seuranta</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Siirry sisältöön</a>
+
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Viikkokello, etusivu">
+      <span class="brand-mark" aria-hidden="true">v.</span>
+      <span>viikkokello</span>
+    </a>
+    <div class="header-tools">
+      <label class="visually-hidden" for="profile-select">Valittu profiili</label>
+      <select id="profile-select" class="profile-select"></select>
+      <label class="visually-hidden" for="profile-color">Valitun profiilin header-väri</label>
+      <input id="profile-color" class="profile-color" name="profileColor" type="color" value="#dcebe2">
+      <button id="add-profile-button" class="button button-secondary add-profile-button" type="button" aria-label="Uusi profiili">
+        <span aria-hidden="true">+</span><span class="add-profile-label">Uusi profiili</span>
+      </button>
+    </div>
+    <p class="privacy-note"><span class="privacy-dot" aria-hidden="true"></span>Tiedot pysyvät tässä selaimessa</p>
+  </header>
+
+  <main id="main" class="page-shell">
+
+
+    <div class="dashboard-layout">
+      <div class="control-sidebar">
+        <section class="intro" aria-labelledby="page-title">
+          <div>
+            <p class="eyebrow">OMA TYÖAIKA, SELKEÄSTI</p>
+            <h1 id="page-title">Työviikko</h1>
+            <p class="intro-copy">Seuraa tehtäviäsi ja taukojasi päivä kerrallaan.</p>
+          </div>
+        </section>
+        <section class="tracker panel" aria-labelledby="tracker-heading">
+          <div class="tracker-top">
+            <div class="tracker-title">
+              <span class="live-indicator" aria-hidden="true"></span>
+              <div>
+                <h2 id="tracker-heading">Työajanseuranta</h2>
+                <p id="tracker-hint">Aloita tehtävä, kun olet valmis.</p>
+              </div>
+            </div>
+            <p id="tracker-date" class="tracker-date"></p>
+          </div>
+
+          <form id="task-form" class="task-form">
+            <label class="visually-hidden" for="task-name">Tehtävän nimi</label>
+            <input id="task-name" name="taskName" type="text" maxlength="80" placeholder="Mitä aiot tehdä?"
+              autocomplete="off" required>
+            <button class="button button-primary" type="submit">
+              <span aria-hidden="true">▶</span> Aloita tehtävä
+            </button>
+          </form>
+
+          <div id="active-task" class="active-task" hidden>
+            <div class="active-task-info">
+              <span id="active-task-name" class="active-task-name"></span>
+              <span id="active-task-time" class="active-task-time"></span>
+              <span id="active-task-duration" class="active-task-duration"></span>
+            </div>
+            <div class="active-task-actions">
+              <button id="break-button" class="button button-break" type="button">Aloita tauko</button>
+              <button id="stop-task-button" class="button button-stop" type="button">Lopeta tehtävä</button>
+            </div>
+          </div>
+          <p id="notice" class="notice" role="status" aria-live="polite"></p>
+        </section>
+
+        <details class="settings panel">
+          <summary><span aria-hidden="true">⚙</span> Työaika-asetukset</summary>
+          <form id="settings-form" class="settings-form">
+            <p>Määritä tavallinen työpäiväsi ja päivittäinen taukoaika. Tiedot tallennetaan vain tähän selaimeen.</p>
+            <div class="settings-fields">
+              <label for="work-start">Työpäivä alkaa</label>
+              <input id="work-start" name="workStart" type="time" required>
+              <label for="work-end">Työpäivä päättyy</label>
+              <input id="work-end" name="workEnd" type="time" required>
+              <label for="daily-break">Taukoaika päivässä (min)</label>
+              <input id="daily-break" name="dailyBreak" type="number" min="0" max="1439" step="5" required
+                aria-describedby="daily-break-hint">
+            </div>
+            <p id="daily-break-hint">Taukoaika vähennetään päivittäisestä työtuntitavoitteesta.</p>
+            <button class="button button-secondary" type="submit">Tallenna asetukset</button>
+          </form>
+        </details>
+      </div>
+
+      <aside class="summary-sidebar" aria-labelledby="summary-heading">
+        <p class="eyebrow">TYÖVIIKON TILANNE</p>
+        <h2 id="summary-heading">Viikon yhteenveto</h2>
+        <div class="summary-grid">
+          <article class="summary-card summary-primary">
+            <span class="summary-label">Tehty työaika</span>
+            <strong id="weekly-total" class="summary-value">—</strong>
+            <span class="summary-detail">Tauot vähennetty</span>
+          </article>
+          <article class="summary-card">
+            <span class="summary-label">Tavoite</span>
+            <strong id="weekly-target" class="summary-value">—</strong>
+            <span class="summary-detail">Päivittäinen työaika vähennettynä tauoilla</span>
+          </article>
+          <article class="summary-card">
+            <span class="summary-label">Jäljellä tavoitteesta</span>
+            <strong id="weekly-remaining" class="summary-value">—</strong>
+            <span class="summary-detail">Tämän viikon kertymä</span>
+          </article>
+        </div>
+      </aside>
+
+      <section class="week-section" aria-labelledby="week-heading">
+        <div class="week-toolbar">
+          <div>
+            <p class="eyebrow">MAANANTAI – PERJANTAI</p>
+            <h2 id="week-heading">Viikon aikataulu</h2>
+          </div>
+          <nav class="week-navigation" aria-label="Viikon valinta">
+            <button id="previous-week" class="icon-button" type="button" aria-label="Edellinen viikko">←</button>
+            <button id="current-week" class="button button-today" type="button">Tämä viikko</button>
+            <button id="next-week" class="icon-button" type="button" aria-label="Seuraava viikko">→</button>
+          </nav>
+        </div>
+
+        <div class="week-label-row">
+          <p id="week-range" class="week-range"></p>
+          <p class="week-readonly" id="week-readonly" hidden>Vanhan viikon tiedot</p>
+        </div>
+
+        <section class="calendar-panel panel" aria-labelledby="calendar-heading">
+          <div class="calendar-heading">
+            <div>
+              <h3 id="calendar-heading">Päivänäkymä</h3>
+              <p>Tehtävät näkyvät aikajanalla. Tauot erottuvat raidallisina.</p>
+            </div>
+            <span class="calendar-key"><span class="key-task" aria-hidden="true"></span>Tehtävä <span class="key-break"
+                aria-hidden="true"></span>Tauko</span>
+          </div>
+          <div class="calendar-scroll" tabindex="0"
+            aria-label="Työviikon kalenteri. Pienellä näytöllä voit selata näkymää vaakasuunnassa.">
+            <div id="week-grid" class="week-grid" aria-live="polite"></div>
+          </div>
+        </section>
+      </section>
+    </div>
+
+    <dialog id="day-dialog" class="day-dialog" aria-labelledby="day-dialog-title">
+      <div class="day-dialog-content">
+        <header class="day-dialog-header">
+          <div>
+            <p class="eyebrow">PÄIVÄN TIEDOT</p>
+            <h1 id="day-dialog-title" class="dialog-title"></h1>
+            <p id="day-dialog-summary" class="day-dialog-summary"></p>
+          </div>
+          <form method="dialog">
+            <button class="icon-button dialog-close" type="submit" aria-label="Sulje päivän tiedot" autofocus>×</button>
+          </form>
+        </header>
+
+        <section aria-label="Päivän tilastot">
+          <div id="day-stats" class="day-stats"></div>
+        </section>
+
+        <section class="day-timeline-section" aria-labelledby="day-timeline-heading">
+          <div class="day-section-heading">
+            <div>
+              <h2 id="day-timeline-heading">Tehtävät aikajärjestyksessä</h2>
+              <p>Kirjaukset näytetään peräkkäin, tauot eriteltyinä</p>
+            </div>
+            <span class="calendar-key"><span class="key-task" aria-hidden="true"></span>Tehtävä <span class="key-break"
+                aria-hidden="true"></span>Tauko</span>
+          </div>
+          <div class="day-timeline-scroll" tabindex="0"
+            aria-label="Päivän tehtävät aloitusajan mukaisessa järjestyksessä">
+            <div id="day-timeline" class="day-timeline"></div>
+          </div>
+        </section>
+      </div>
+    </dialog>
+
+    <dialog id="profile-dialog" class="profile-dialog" aria-labelledby="profile-dialog-title">
+      <form id="profile-form" class="profile-form" aria-labelledby="profile-dialog-title">
+        <h2 id="profile-dialog-title">Lisää profiili</h2>
+        <p>Jokaisella profiililla on omat tehtävät ja työaika-asetukset.</p>
+        <label for="profile-name">Profiilin nimi</label>
+        <input id="profile-name" name="profileName" type="text" maxlength="40" autocomplete="off" aria-describedby="profile-error" required autofocus>
+        <p id="profile-error" class="profile-error" role="alert" hidden></p>
+        <div class="profile-form-actions">
+          <button id="cancel-profile-button" class="button button-secondary" type="button">Peruuta</button>
+          <button class="button button-primary" type="submit">Luo profiili</button>
+        </div>
+      </form>
+    </dialog>
+
+    <footer class="page-footer">
+      <span class="footer-lock" aria-hidden="true">⌑</span>
+      <p>Työaikatietosi tallentuvat selaimen paikalliseen tietokantaan. Niitä ei lähetetä verkkoon.</p>
+    </footer>
+
+    <div id="error-message" class="error-message" role="alert" hidden></div>
+  </main>
+</body>
+
+</html>
