@@ -1,0 +1,181 @@
+{
+    "personInfo": {
+        "title": "Personal Info",
+        "content": [
+            {
+                "name": "City",
+                "cont": "Utopia"
+            },
+            {
+                "name": "Email",
+                "cont": "stratos.olivia@example.com",
+                "url": "stratos.olivia@example.com"
+            },
+            {
+                "name": "Phone",
+                "cont": "011011011",
+                "url": "tel:011011011"
+            },
+            {
+                "name": "Born",
+                "cont": "to be wild"
+            }
+        ]
+    },
+    "personalLinks": {
+        "title": "Links",
+        "content": [
+            {
+                "name": "github",
+                "url": "https://github.com/OliverStrait"
+            }
+        ]
+    },
+    "programming": {
+        "title": "Programming and ...",
+        "content": [
+            {
+                "name": "HTML, CSS",
+                "desc": "Can center a div, given enough time and snacks."
+            },
+            {
+                "name": "Git ja GitHub",
+                "desc": "Comfortable branching off and occasionally losing my way back."
+            },
+            {
+                "name": "Dokumentointi",
+                "desc": "Writes docs for the code I meant to write."
+            },
+            {
+                "name": "Rubber-duck debugging",
+                "desc": "My duck has seniority and veto power."
+            },
+            {
+                "name": "Stack Overflow archaeology",
+                "desc": "Expert at finding answers posted just before the question changed."
+            },
+            {
+                "name": "CSS flexbox diplomacy",
+                "desc": "Negotiates peaceful alignment between stubborn elements."
+            },
+            {
+                "name": "Production debugging",
+                "desc": "Can reproduce the bug only when nobody is watching."
+            },
+            {
+                "name": "Naming variables",
+                "desc": "Has used both data and dataFinalFinal2."
+            }
+        ]
+    },
+    "education": {
+        "title": "Education",
+        "content": [
+            {
+                "start": "10/1885",
+                "end": "3/1887",
+                "end_year": "1887",
+                "desc": "Data mining like my grand-grand father",
+                "institution": "Imaginarium Dream institute"
+            },
+            {
+                "start": "1456",
+                "end": "1462",
+                "end_year": "1462",
+                "desc": "Advanbced Dream studies",
+                "institution": "Imaginarium Dream institute"
+            },
+            {
+                "start": "2021",
+                "end": "2022",
+                "end_year": "2022",
+                "desc": "Applied Git archaeology and conflict resolution",
+                "institution": "Institute of Applied Merge Conflicts"
+            }
+        ]
+    },
+    "courses": {
+        "title": "Other courses:",
+        "content": [
+            {
+                "start": "8/2025",
+                "end": "9/2025",
+                "end_year": "2025",
+                "desc": "Demele Lipre an Dulorem ups etre",
+                "url": "#"
+            },
+            {
+                "start": "2/2017",
+                "end": "5/2085",
+                "end_year": "2085",
+                "desc": "Addvan. Impluse Lorem ipsem ",
+                "url": "#"
+            },
+            {
+                "start": "3/2024",
+                "end": "4/2024",
+                "end_year": "2024",
+                "desc": "Git Rebase: Rewrite History, Not Your Resume",
+                "url": "#"
+            },
+            {
+                "start": "6/2025",
+                "end": "6/2025",
+                "end_year": "2025",
+                "desc": "Promises, Async/Await, and Other Ways to Wait",
+                "url": "#"
+            },
+            {
+                "start": "6/2025",
+                "end": "6/2025",
+                "end_year": "2025",
+                "desc": "Practical patience and Asynchronous communication",
+                "url": "#"
+            },
+            {
+                "start": "6/2025",
+                "end": "6/2025",
+                "end_year": "2025",
+                "desc": "Promises, Async/Await, and Other Ways to Wait",
+                "url": "#"
+            }
+        ]
+    },
+    "jobs": {
+        "title": "Jobs",
+        "content": [
+            {
+                "start": "6/2025",
+                "end": "6/2025",
+                "end_year": "2025",
+                "desc": "This is real job in real life",
+                "url": "#"
+            }
+        ]
+    },
+    "hobbies": {
+        "title": "Hobbies",
+        "content": [
+            {
+                "name": "climbing",
+                "desc": "Mountains are just little hills with excellent uptime."
+            },
+            {
+                "name": "data-mining",
+                "desc": "For breakfast; logs for dessert."
+            },
+            {
+                "name": "mechanical keyboards",
+                "desc": "Collects more switches than working projects."
+            },
+            {
+                "name": "refactoring",
+                "desc": "Moves the same bug into a better-named function."
+            },
+            {
+                "name": "psychology",
+                "desc": "Especially the psychology of a flaky test."
+            }
+        ]
+    }
+}

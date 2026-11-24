@@ -5,6 +5,7 @@ class DataTemplateElement extends HTMLElement {
     }
 
     set data(value) {
+        if (value === null && value === undefined) { return }
         this._data = value
         this.render()
     }
@@ -20,6 +21,15 @@ class DataTemplateElement extends HTMLElement {
     templateContent(id) {
         return document.getElementById(id).content.cloneNode(true)
     }
+
+    render() {
+        if (!this.isConnected) return false
+        if (!this.data) {
+            this.replaceChildren()
+            return false
+        }
+        return true
+    }
 }
 function link_or_bold(url, name, item) {
     const link = item.querySelector("a")
@@ -34,9 +44,46 @@ function link_or_bold(url, name, item) {
         link.remove()
     }
 }
+class CvName extends DataTemplateElement {
+
+    render() {
+        if (! super.render()) return;
+
+        const content = document.createElement("h3")
+        content.textContent = this.data ?? "No name"
+        this.replaceChildren(content)
+    }
+}
+
+class CvStory extends DataTemplateElement {
+
+    render() {
+        if (! super.render()) return;
+        const content = this.templateContent("cv-main-story")
+        const heading = content.querySelector("h2")
+        const text = content.querySelector("div")
+        if (this.data?.title || this.data?.title == "") {
+            heading.textContent = this.data?.title ?? ""
+        } else { heading.remove() }
+        text.innerHTML = this.data?.content ?? ""
+        console.log("data", this.data)
+
+        this.replaceChildren(content)
+    }
+}
+class CvList extends DataTemplateElement {
+
+    render() {
+        if (! super.render()) return;
+
+        const content = document.createElement("h3")
+        content.textContent = this.data ?? "No name"
+        this.replaceChildren(content)
+    }
+}
 class CvLinkList extends DataTemplateElement {
     render() {
-        if (!this.isConnected || !this.data) return
+        if (! super.render()) return;
 
         const content = this.templateContent("link-list-template")
         const heading = content.querySelector("h4")
@@ -59,7 +106,7 @@ class CvLinkList extends DataTemplateElement {
 
 class CvPersonalInfo extends DataTemplateElement {
     render() {
-        if (!this.isConnected || !this.data) return
+        if (!super.render()) return;
 
         const content = this.templateContent("personal-info-template")
         const list = content.querySelector("ul")
@@ -86,7 +133,7 @@ class CvPersonalInfo extends DataTemplateElement {
 
 class CvSkillList extends DataTemplateElement {
     render() {
-        if (!this.isConnected || !this.data) return
+        if (!super.render()) return;
 
         const content = this.templateContent("skill-list-template")
         const heading = content.querySelector("h3")
@@ -109,7 +156,7 @@ class CvSkillList extends DataTemplateElement {
 
 class CvTimelineList extends DataTemplateElement {
     render() {
-        if (!this.isConnected || !this.data) return
+        if (!super.render()) return;
 
         const content = this.templateContent("timeline-list-template")
         const heading = content.querySelector("h3")
@@ -167,6 +214,9 @@ class CvStylePicker extends HTMLElement {
 }
 
 customElements.define("cv-link-list", CvLinkList)
+customElements.define("cv-name", CvName)
+
+customElements.define("cv-story", CvStory)
 customElements.define("cv-personal-info", CvPersonalInfo)
 customElements.define("cv-skill-list", CvSkillList)
 customElements.define("cv-timeline-list", CvTimelineList)

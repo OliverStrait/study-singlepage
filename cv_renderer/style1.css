@@ -164,7 +164,8 @@ aside {
 
 }
 
-cv-style-picker {
+cv-style-picker,
+cv-data-picker {
     display: block;
     margin: 1rem 0 1.5rem;
     text-align: left;

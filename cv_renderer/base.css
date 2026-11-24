@@ -5,10 +5,10 @@ cv-timeline-list {
     display: block;
 }
 
-
 @media print {
 
-    cv-style-picker {
+    cv-style-picker,
+    cv-data-picker {
         display: none;
     }
 }

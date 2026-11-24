@@ -223,30 +223,31 @@ article {
     font-size: .82rem;
 }
 
-cv-style-picker {
+cv-style-picker,
+cv-data-picker {
     display: block;
     margin: 1.5rem 0 1.75rem;
-}
 
-cv-style-picker label {
-    display: grid;
-    gap: .4rem;
-    color: #ff9be9;
-    font-family: "Courier New", monospace;
-    font-size: .78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-}
+    label {
+        display: grid;
+        gap: .4rem;
+        color: #ff9be9;
+        font-family: "Courier New", monospace;
+        font-size: .78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
 
-cv-style-picker select {
-    width: 100%;
-    padding: .6rem .7rem;
-    border: 1px solid #53f7ed;
-    border-radius: 2px;
-    background: #090b22;
-    color: #a3fff7;
-    font: inherit;
-    text-transform: none;
+    select {
+        width: 100%;
+        padding: .6rem .7rem;
+        border: 1px solid #53f7ed;
+        border-radius: 2px;
+        background: #090b22;
+        color: #a3fff7;
+        font: inherit;
+        text-transform: none;
+    }
 }
 
 @media (max-width: 720px) {

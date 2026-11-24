@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>
+        Article demo
+    </title>
+
+</head>
+
+<body>
+    <style>
+        :root {
+            --col-high: rgb(158, 121, 52);
+        }
+
+        body {
+            background-color: rgb(102, 92, 80);
+        }
+
+        main {
+            font-family: Garamond, 'Times New Roman', Times, serif;
+
+            width: 50vw;
+            margin: auto;
+            min-height: 100vw;
+            background-color: aliceblue;
+            padding: 2em;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h2 {
+            font-family: Georgia;
+        }
+
+        p {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .ingress {
+            font-family: Garamond, 'Times New Roman', Times, serif;
+            font-size: 1.4rem;
+            /* margin: auto; */
+            width: 74%;
+            padding: 0 5% 1em 0;
+            /* padding-bottom: 1em; */
+            border-bottom: solid .1em;
+
+            /* border-bottom: 0.1em dashed var(--col-high); */
+        }
+
+        .ingress::first-letter {
+            color: var(--col-high);
+            font-size: 2em;
+        }
+
+        .meta-box {
+            float: right;
+            max-width: 20%;
+            min-height: 30vh;
+            border-left: .2em dotted grey;
+            margin-left: 1em;
+            padding: .5em;
+        }
+
+        .doc-status {
+            background-color: rgba(161, 89, 6, 0.329);
+            /* display: block; */
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            width: 26vw;
+            padding: 0.5em 1em;
+            border-radius: 2em;
+            /* rotate: -45deg; */
+        }
+
+        .right {
+            float: right;
+            margin: 0 0 0 1em;
+            border: 1px dashed;
+        }
+
+        @media print {
+
+            .meta-box,
+            .doc-status {
+
+                display: none;
+            }
+
+            main {
+                width: 100%;
+                margin: auto;
+            }
+
+        }
+    </style>
+    <main>
+        <span class="doc-status">Editorial version</span>
+        <h1>Cats and dogs: A Timeless Companionship</h1>
+        <div class="meta-box">
+            <ul>
+                <li>13.01.2026</li>
+            </ul>
+            <p><a href="/hash/import">#import</a>
+                <a href="#kerl">#kool</a>
+                <a href="#kerl">#nala</a>
+                <a href="#kerl">#Tresso</a>
+            </p>
+        </div>
+        <p class="ingress">Cats and dogs have been cherished companions for centuries, each offering unique traits that
+            make them beloved members of countless households worldwide.
+
+        </p>
+
+
+        <p>
+            Cats and dogs have played a vital role in human life for thousands of years. They provide companionship,
+            emotional support, and even health benefits by reducing stress and promoting physical activity. Dogs have
+            historically assisted humans in hunting, herding, and protection, while cats have helped control pests and
+            offered comfort in homes. Today, both animals are cherished family members, contributing to our well-being
+            and happiness.
+        </p>
+
+        <h2>Cats vs. Dogs: A Friendly Rivalry</h2>
+        <p>
+            Cats and dogs may share our homes, but they definitely don't share the same philosophy on life. Dogs believe
+            every day is a party and you're the guest of honor. Cats, on the other hand, think they own the house and
+            you're just lucky to pay rent.
+        </p>
+        <p>
+            Dogs will greet you like you've returned from a heroic quest—even if you just went to take out the trash.
+            Cats? They'll glance up from their nap as if to say, “Oh, you again.” Dogs live for belly rubs and fetch;
+            cats live for knocking things off shelves at 3 a.m. Dogs want to please you; cats want you to please them.
+        </p>
+        <p>
+            In short, dogs are the extroverts of the pet world, while cats are the mysterious introverts who
+            occasionally grace us with affection—on their terms. And that's why we love them both.
+        </p>
+
+
+        <h2>The World of Cats</h2>
+        <img class="right"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Orange_tabby_cat_sitting_on_fallen_leaves-Hisashi-01.jpg/330px-Orange_tabby_cat_sitting_on_fallen_leaves-Hisashi-01.jpg">
+        <p>Cats are known for their independence, elegance, and affectionate nature. They come in a wide variety of
+            breeds, each with distinct characteristics and personalities.</p>
+        <p><strong>Maine Coon:</strong> One of the largest domestic cat breeds, Maine Coons are gentle giants with long,
+            thick fur and tufted ears. They are friendly, intelligent, and great with families.</p>
+        <p><strong>Siamese:</strong> Recognized for their striking blue eyes and sleek, short coat, Siamese cats are
+            vocal and social. They thrive on interaction and often form strong bonds with their owners.</p>
+        <p><strong>Persian:</strong> Known for their luxurious long coats and calm demeanor, Persians are affectionate
+            lap cats. They require regular grooming to maintain their beautiful fur.</p>
+        <p><strong>Bengal:</strong> Bengals have a wild, exotic appearance with leopard-like spots. They are active,
+            playful, and love interactive games, making them ideal for energetic households.</p>
+
+        </p>
+
+
+        <h2>Life of Dogs as Human's Best Buddy</h2>
+        <p>
+            Dogs have earned the title of "man's best friend" for good reason. Their loyalty, affection, and ability to
+            form deep emotional bonds make them invaluable companions. Throughout history, dogs have worked alongside
+            humans as hunters, herders, protectors, and service animals.</p>
+        <p> Today, they continue to enrich our lives by
+            offering unconditional love, reducing stress, and encouraging physical activity through play and walks.
+            Whether as family pets or therapy animals, dogs bring joy, security, and companionship to millions of
+            households worldwide.
+        </p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam velit hic, atque sed illum, totam sequi
+            amet a dolore iure expedita nisi, maiores beatae voluptatum. Ipsa at similique unde ipsam?
+
+        </p>
+
+
+
+
+    </main>
+</body>
+
+</html>

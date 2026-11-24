@@ -1,0 +1,114 @@
+{
+    "personInfo": {
+        "title": "Personal Info",
+        "content": [
+            {
+                "name": "City",
+                "cont": "Atlantis"
+            },
+            {
+                "name": "Email",
+                "cont": "nora.lee@example.com",
+                "url": "nora.lee@example.com"
+            },
+            {
+                "name": "Phone",
+                "cont": "+358401234567",
+                "url": "tel:+358401234567"
+            },
+            {
+                "name": "Born",
+                "cont": "1996"
+            }
+        ]
+    },
+    "personalLinks": {
+        "title": "Links",
+        "content": [
+            {
+                "name": "github",
+                "url": "https://github.com/example"
+            },
+            {
+                "name": "portfolio",
+                "url": "https://example.com"
+            }
+        ]
+    },
+    "programming": {
+        "title": "Programming and ...",
+        "content": [
+            {
+                "name": "JavaScript",
+                "desc": "Builds UI without breaking the browser."
+            },
+            {
+                "name": "HTML",
+                "desc": "Knows semantics and accessibility basics."
+            },
+            {
+                "name": "CSS",
+                "desc": "Can organize layouts and spacing with confidence."
+            },
+            {
+                "name": "Node.js",
+                "desc": "Runs scripts and small tools for automation."
+            }
+        ]
+    },
+    "education": {
+        "title": "Education",
+        "content": [
+            {
+                "start": "2018",
+                "end": "2022",
+                "end_year": "2022",
+                "desc": "Bachelor of Science in Software Engineering",
+                "institution": "North Star Institute"
+            },
+            {
+                "start": "2014",
+                "end": "2018",
+                "end_year": "2018",
+                "desc": "Computer Science and Design",
+                "institution": "Raven Technical College"
+            }
+        ]
+    },
+    "courses": {
+        "title": "Other courses:",
+        "content": [
+            {
+                "start": "6/2025",
+                "end": "7/2025",
+                "end_year": "2025",
+                "desc": "Modern frontend patterns",
+                "url": "#"
+            },
+            {
+                "start": "4/2025",
+                "end": "5/2025",
+                "end_year": "2025",
+                "desc": "Testing for web apps",
+                "url": "#"
+            }
+        ]
+    },
+    "hobbies": {
+        "title": "Hobbies",
+        "content": [
+            {
+                "name": "hiking",
+                "desc": "Always planning the next trail."
+            },
+            {
+                "name": "photography",
+                "desc": "Captures light, color, and weather."
+            },
+            {
+                "name": "board games",
+                "desc": "Enjoys strategy and a little chaos."
+            }
+        ]
+    }
+}

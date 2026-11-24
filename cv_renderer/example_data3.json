@@ -1,0 +1,58 @@
+{
+    "personInfo": {
+        "title": "Personal Info",
+        "content": [
+            {
+                "name": "City",
+                "cont": "New City"
+            },
+            {
+                "name": "Email",
+                "cont": "new@example.com",
+                "url": "new@example.com"
+            }
+        ]
+    },
+    "personalLinks": {
+        "title": "Links",
+        "content": [
+            {
+                "name": "github",
+                "url": "https://github.com/newuser"
+            }
+        ]
+    },
+    "programming": {
+        "title": "Me and programming",
+        "content": [
+            {
+                "name": "JavaScript",
+                "desc": "Fast and simple."
+            }
+        ]
+    },
+    "education": {
+        "title": "Education",
+        "content": [
+            {
+                "start": "2020",
+                "end": "2024",
+                "end_year": "2024",
+                "desc": "New degree",
+                "institution": "New Institute"
+            }
+        ]
+    },
+    "courses": {
+        "title": "Other courses:",
+        "content": [
+            {
+                "start": "1/2026",
+                "end": "2/2026",
+                "end_year": "2026",
+                "desc": "Fresh course",
+                "url": "#"
+            }
+        ]
+    }
+}
